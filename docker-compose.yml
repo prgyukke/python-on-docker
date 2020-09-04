@@ -1,10 +1,14 @@
 version: '3'
 services:
   app:
-    image: python:3.8
+    build:
+      context: .
+      dockerfile: dockerfile
+    command: jupyter notebook --port 8888 --ip=0.0.0.0 --allow-root
     ports:
-      - "4000:80"
+      - "8888:8888"
     volumes:
       - .:/app
-    working_dir: /app
+      - ./jupyter:/jupyter
+    working_dir: /jupyter
     tty: true
